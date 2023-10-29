@@ -3,7 +3,7 @@ import { colors } from "@mui/material";
 
 export const themeDefault = createTheme({
   palette: {
-    primary: colors.pink[100],
+    primary: colors.pink,
     // secondary: colors.red,
   },
 });
