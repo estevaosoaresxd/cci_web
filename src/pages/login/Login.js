@@ -14,29 +14,16 @@ import {
   Button,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { themeDefault } from "../../shared/theme/themeDefault";
 import image from "../../shared/assets/images/bons-fluidos.png";
+import logo from "../../shared/assets/images/bons-fluidos-logo-white.png";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { useNavigate } from "react-router-dom";
+import CopyrightBase from "../../shared/components/CopyrightBase";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,6 +31,8 @@ export default function Login() {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    navigate(`/home`);
   };
 
   return (
@@ -76,8 +65,15 @@ export default function Login() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
+            <Avatar
+              sx={{
+                m: 1,
+                height: 50,
+                width: 50,
+                bgcolor: themeDefault.palette.primary.main,
+              }}
+            >
+              <img src={logo} alt="logo" width={35} height={30} />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
@@ -93,7 +89,7 @@ export default function Login() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="E-mail"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -103,14 +99,14 @@ export default function Login() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Senha"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label="Lembrar usuário"
               />
               <Button
                 type="submit"
@@ -118,21 +114,16 @@ export default function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Entrar
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link onClick={() => navigate("/register")} variant="body2">
+                    {"Não tem uma conta? Registre-se"}
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
+              <CopyrightBase sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>

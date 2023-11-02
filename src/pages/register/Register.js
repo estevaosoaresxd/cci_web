@@ -8,37 +8,21 @@ import {
   Grid,
   Link,
   TextField,
-  FormControlLabel,
   CssBaseline,
   Button,
   Avatar,
-  Checkbox,
   Box,
 } from "@mui/material";
 
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import logo from "../../shared/assets/images/bons-fluidos-logo-white.png";
 
 import { themeDefault } from "../../shared/theme/themeDefault";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { useNavigate } from "react-router-dom";
+import CopyrightBase from "../../shared/components/CopyrightBase";
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,6 +30,8 @@ export default function Register() {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    navigate(`/login`);
   };
 
   return (
@@ -60,11 +46,18 @@ export default function Register() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar
+            sx={{
+              m: 1,
+              height: 50,
+              width: 50,
+              bgcolor: themeDefault.palette.primary.main,
+            }}
+          >
+            <img src={logo} alt="logo" width={35} height={30} />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Registrar
           </Typography>
           <Box
             component="form"
@@ -80,7 +73,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label="Primeiro nome"
                   autoFocus
                 />
               </Grid>
@@ -89,7 +82,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label="Ultimo nome"
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -99,7 +92,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="E-mail"
                   name="email"
                   autoComplete="email"
                 />
@@ -109,18 +102,10 @@ export default function Register() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Senha"
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
@@ -130,18 +115,18 @@ export default function Register() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Registrar
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                  Já tem uma conta? Clique aqui.
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <CopyrightBase sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
