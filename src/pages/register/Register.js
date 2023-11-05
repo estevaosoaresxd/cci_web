@@ -119,7 +119,7 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link variant="body2" onClick={() => navigate(`/login`)}>
                   Já tem uma conta? Clique aqui.
                 </Link>
               </Grid>
